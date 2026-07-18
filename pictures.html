@@ -1,10 +1,124 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Writing</title>
+    <title>Pictures</title>
+    <style>
+        body {
+            font-family: 'UnifrakturCook', cursive;
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .img-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .gallery img {
+            width: 150px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* HOTSPOT — TEMPORARILY VISIBLE */
+        .hotspot {
+            position: absolute;
+            cursor: pointer;
+            background: rgba(255, 0, 0, 0.3); /* REMOVE THIS WHEN DONE */
+        }
+
+        /* POPUP */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            display: flex;
+            gap: 30px;
+            max-width: 90%;
+            align-items: center;
+        }
+
+        .popup img {
+            width: 60%;
+            border-radius: 10px;
+        }
+
+        .popup-text {
+            width: 30%;
+            font-size: 18px;
+            text-align: left;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            font-size: 40px;
+            cursor: pointer;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Writing</h1>
-    <p>Welcome to my pictures archive.</p>
+    <h1>PICTURES</h1>
+
+    <div class="gallery">
+
+        <!-- IMAGE WITH FULL-SHIRT HOTSPOT -->
+        <div class="img-container">
+            <img src="IMG_8767.JPG" onclick="openPopup('IMG_8767.JPG', 'Main blurb for the whole photo.')">
+
+            <!-- FULL SHIRT HOTSPOT -->
+            <div class="hotspot"
+                 style="
+                    top:60px;      /* move DOWN */
+                    left:40px;     /* move RIGHT */
+                    width:80px;    /* shirt WIDTH */
+                    height:100px;  /* shirt HEIGHT */
+                 "
+                 onclick="openPopup('IMG_8767.JPG', 'Blurb specifically about the shirt area.')">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="popup" id="popup">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <div class="popup-content">
+            <img id="popup-img">
+            <div class="popup-text" id="popup-text"></div>
+        </div>
+    </div>
+
+    <script>
+        function openPopup(imgSrc, text) {
+            document.getElementById('popup-img').src = imgSrc;
+            document.getElementById('popup-text').innerText = text;
+            document.getElementById('popup').style.display = 'flex';
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+    </script>
+
 </body>
 </html>
